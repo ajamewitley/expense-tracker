@@ -1,0 +1,45 @@
+{
+  "info": { "name": "Expense Tracker - Postman Tests", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "item": [
+    {
+      "name": "POST - Create Expense",
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 201', function(){ pm.response.to.have.status(201); });", "pm.test('Has id', function(){ pm.expect(pm.response.json()).to.have.property('id'); });"] } }],
+      "request": { "method": "POST", "url": "http://localhost:3000/expenses", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"title\":\"Lunch\",\"amount\":5000,\"category\":\"Food\",\"date\":\"2026-11-24\"}" } }
+    },
+    {
+      "name": "GET - All Expenses",
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 200', function(){ pm.response.to.have.status(200); });"] } }],
+      "request": { "method": "GET", "url": "http://localhost:3000/expenses" }
+    },
+    {
+      "name": "GET - Expenses by Month and Year",
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 200', function(){ pm.response.to.have.status(200); });"] } }],
+      "request": { "method": "GET", "url": "http://localhost:3000/expenses?month=11&year=2026" }
+    },
+    {
+      "name": "GET - Expenses by Day Month Year",
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 200', function(){ pm.response.to.have.status(200); });"] } }],
+      "request": { "method": "GET", "url": "http://localhost:3000/expenses?day=24&month=11&year=2026" }
+    },
+    {
+      "name": "GET - One Expense",
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 200', function(){ pm.response.to.have.status(200); });"] } }],
+      "request": { "method": "GET", "url": "http://localhost:3000/expenses/1" }
+    },
+    {
+      "name": "PATCH - Update Expense",
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 200', function(){ pm.response.to.have.status(200); });"] } }],
+      "request": { "method": "PATCH", "url": "http://localhost:3000/expenses/1", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"amount\":6000}" } }
+    },
+    {
+      "name": "GET - Summary",
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 200', function(){ pm.response.to.have.status(200); });", "pm.test('Has total', function(){ pm.expect(pm.response.json()).to.have.property('total'); });"] } }],
+      "request": { "method": "GET", "url": "http://localhost:3000/expenses/summary" }
+    },
+    {
+      "name": "DELETE - Delete Expense",
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 200', function(){ pm.response.to.have.status(200); });"] } }],
+      "request": { "method": "DELETE", "url": "http://localhost:3000/expenses/1" }
+    }
+  ]
+}
