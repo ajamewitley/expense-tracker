@@ -1,14 +1,19 @@
 require('dotenv').config();
+
 const express = require('express');
-const port = process.env.PORT;
+const expenseRoutes = require('./routes/expenseRoutes');
 
 const app = express();
 
-// Array to be used for storing expenses
-const expenses = [];
+const port = process.env.PORT || 3000;
 
+// Middleware
 app.use(express.json());
 
+// Expense routes
+app.use('/expenses', expenseRoutes);
+
+// Start server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on http://localhost:${port}`);
 });
